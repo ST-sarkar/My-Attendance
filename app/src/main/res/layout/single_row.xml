@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:id="@+id/cardv"
+        android:layout_height="60dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardCornerRadius="20dp"
+        android:background="@drawable/border"
+        android:layout_gravity="center_horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="roll no"
+        android:layout_marginStart="20dp"
+        android:textSize="25sp"
+        android:id="@+id/tx_roll"
+        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="name"
+            android:layout_marginLeft="20dp"
+            android:textSize="15sp"
+            android:id="@+id/tx_name"
+            />
+        <CheckBox
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/precheckbox"
+            android:layout_marginLeft="210dp"/>
+        </LinearLayout>
+</androidx.cardview.widget.CardView>
+

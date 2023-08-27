@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="TKIET"
+        android:layout_marginTop="40dp"
+        android:textSize="40sp"
+        android:id="@+id/login_name"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+
+        android:layout_marginTop="10dp"
+        android:gravity="center">
+
+        <androidx.cardview.widget.CardView
+            android:layout_below="@+id/login_logo"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:cardCornerRadius="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="200dp"
+            app:cardElevation="10dp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:gravity="center">
+                <EditText
+                    android:id="@+id/ed_email"
+                    android:layout_width="315dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="false"
+                    android:layout_alignParentEnd="false"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="30dp"
+                    android:autofillHints=""
+                    android:background="@drawable/textbox_gradient"
+                    android:drawableStart="@drawable/email"
+                    android:hint="Email"
+                    android:singleLine="true"
+                    android:textSize="18sp"
+                    android:padding="5dp"
+                    tools:ignore="TextFields" />
+
+                <EditText
+                    android:id="@+id/ed_pass"
+                    android:layout_width="315dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="false"
+                    android:layout_alignParentEnd="false"
+                    android:layout_centerHorizontal="true"
+                    android:autofillHints=""
+                    android:padding="5dp"
+                    android:singleLine="true"
+                    android:background="@drawable/textbox_gradient"
+                    android:drawableStart="@drawable/password"
+                    android:ems="10"
+                    android:hint="Password"
+                    android:inputType="textPassword" />
+
+                <Button
+                    android:id="@+id/btn_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/ed_pass"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginTop="35dp"
+                    android:text="login"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

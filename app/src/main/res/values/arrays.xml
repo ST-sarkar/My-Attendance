@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="user_selection">
+        <item>Student</item>
+        <item>Teacher</item>
+    </array>
+</resources>
