@@ -23,9 +23,10 @@ import java.util.List;
 public class TeacherActivity extends AppCompatActivity {
     ImageButton logout;
     TextView dept,name;
-    Button takeatt,seeatt;
-    List<String> list=new ArrayList<>();
-    String dp,nm;
+    Button takeatt,seeatt,sendmessage,uploadnotes;
+    ArrayList<String> list=new ArrayList<>();
+    String dp,nm,yr;
+    String sem, sub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,8 @@ public class TeacherActivity extends AppCompatActivity {
         name=findViewById(R.id.tx_name);
         takeatt=findViewById(R.id.btn_takeatt);
         seeatt=findViewById(R.id.btn_seeatt);
+        sendmessage=findViewById(R.id.show_msg_button);
+        uploadnotes=findViewById(R.id.btn_upload_notes);
 
         String uid=getIntent().getStringExtra("uid");
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Teachers");
@@ -51,8 +54,8 @@ public class TeacherActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
-                                    String yr = dataSnapshot1.getKey();
-                                    String sem, sub;
+                                    yr = dataSnapshot1.getKey();
+
                                     if (snapshot.child(yr).child("semester-1").exists()) {
                                         sem = "semester-1";
                                     } else {
@@ -89,7 +92,7 @@ public class TeacherActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(TeacherActivity.this,TakeAttSubjectActivity.class);
                 intent.putExtra("uid",uid);
-                intent.putStringArrayListExtra("list", (ArrayList<String>) list);
+                intent.putStringArrayListExtra("list", list);
                 intent.putExtra("from","takeatt");
                 startActivity(intent);
             }
@@ -99,8 +102,28 @@ public class TeacherActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(TeacherActivity.this,TakeAttSubjectActivity.class);
                 intent.putExtra("uid",uid);
-                intent.putStringArrayListExtra("list", (ArrayList<String>) list);
+                intent.putStringArrayListExtra("list", list);
                 intent.putExtra("from","seeatt");
+                startActivity(intent);
+            }
+        });
+
+        sendmessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(TeacherActivity.this,TakeAttSubjectActivity.class);
+                intent.putExtra("from","sendmess");
+                intent.putStringArrayListExtra("list", list);
+                startActivity(intent);
+            }
+        });
+
+        uploadnotes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(TeacherActivity.this,TakeAttSubjectActivity.class);
+                intent.putExtra("from","upload");
+                intent.putStringArrayListExtra("list", list);
                 startActivity(intent);
             }
         });

@@ -33,7 +33,7 @@ import java.util.Objects;
 
 public class StudentActivity extends AppCompatActivity {
     ImageButton logout;
-    Button update, seeatt;
+    Button update, seeatt,viewnotice,pdfview;
     TextView dept, year, sem, name;
     Spinner sp_subject;
     ArrayAdapter<String> adaptersub;
@@ -48,7 +48,9 @@ public class StudentActivity extends AppCompatActivity {
 
         logout = findViewById(R.id.btn_logout);
         update = findViewById(R.id.update_info_button);
+        pdfview = findViewById(R.id.btn_viewpdf);
         seeatt = findViewById(R.id.Seeatt_Button);
+        viewnotice=findViewById(R.id.show_notice_button);
         dept = findViewById(R.id.tx_dept);
         year = findViewById(R.id.tx_year);
         sem = findViewById(R.id.tx_sem);
@@ -57,6 +59,8 @@ public class StudentActivity extends AppCompatActivity {
         uid = getIntent().getStringExtra("uid");
 
         Intent intent = new Intent(StudentActivity.this, StudAttViewActivity.class);
+        Intent intent1=new Intent(StudentActivity.this,ViewMessageActivity.class);
+        Intent intent2=new Intent(StudentActivity.this,PDFViewActivity.class);
         List<String> sublist = new ArrayList<>();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("students");
 
@@ -70,6 +74,14 @@ public class StudentActivity extends AppCompatActivity {
                         sdept = String.valueOf(dataSnapshot.child("department").getValue());
                         ssem = String.valueOf(dataSnapshot.child("semester").getValue());
                         syear = String.valueOf(dataSnapshot.child("year").getValue());
+
+                        intent1.putExtra("year",syear);
+                        intent1.putExtra("dept",sdept);
+                        intent1.putExtra("semester",ssem);
+
+                        intent2.putExtra("year",syear);
+                        intent2.putExtra("dept",sdept);
+                        intent2.putExtra("semester",ssem);
 
                         dept.setText(sdept);
                         sem.setText(ssem);
@@ -97,13 +109,8 @@ public class StudentActivity extends AppCompatActivity {
                                         sp_subject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                             @Override
                                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                //Toast.makeText(StudentActivity.this, "under onitemselected", Toast.LENGTH_SHORT).show();
-
-                                                    //sp_subject.setSelection(position);
                                                     subject = parent.getItemAtPosition(position).toString();
                                                     intent.putExtra("subject", subject);
-                                                    //Toast.makeText(StudentActivity.this, "subject:"+subject, Toast.LENGTH_SHORT).show();
-
                                             }
 
                                             @Override
@@ -143,86 +150,7 @@ public class StudentActivity extends AppCompatActivity {
             }
         });
 
-        /*reference.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
-                    //for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()) {
-                       // if(dataSnapshot.getKey().equals(uid)) {
-                            //Toast.makeText(StudentActivity.this, "inside loop"+uid, Toast.LENGTH_SHORT).show();
-                            Log.d("inside loop",uid);
-                            DataSnapshot dsdept = dataSnapshot.child("department");
-                            sdept=dsdept.getValue(String.class);
-                            Log.d("sdept",sdept);
-                            DataSnapshot dssem = dataSnapshot.child("semester");
-                            ssem=dssem.getValue(String.class);
-                            Log.d("ssem",ssem);
-                            DataSnapshot dsyear = dataSnapshot.child("year");
-                            syear=dsyear.getValue(String.class);
-                            Log.d("syear",syear);
-                            DataSnapshot dsname = dataSnapshot.child("name");
-                            sname=dsname.getValue(String.class);
 
-                    dept.setText(sdept);
-                    sem.setText(ssem);
-                    year.setText(syear);
-                    name.setText(sname);
-
-
-                    intent.putExtra("subject",subject);
-                    intent.putExtra("department",sdept);
-                    intent.putExtra("year",syear);
-                    intent.putExtra("semester",ssem);
-                    intent.putExtra("suid",uid);
-
-                            //Log.d("sname",sname);
-                            datalist.put("sdept",sdept);
-                            datalist.put("ssem",ssem);
-                            datalist.put("syear",syear);
-                            datalist.put("sname",sname);
-                            //Log.d("sname",datalist.get("sname"));
-                    getsubjects(datalist);
-
-                    if (sublist!=null) {
-                        adaptersub = new ArrayAdapter<>(StudentActivity.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, sublist);
-                        sp_subject.setAdapter(adaptersub);
-                    }else {
-                        Toast.makeText(StudentActivity.this, "empty sublist", Toast.LENGTH_SHORT).show();
-                    }
-
-                    sp_subject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            subject=sublist.get(position);
-                            intent.putExtra("subject",subject);
-                            Log.d("subject",subject);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-
-                        }
-                    });
-                       // }
-                    //}
-                }else{
-                    Toast.makeText(StudentActivity.this, "student data not found", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        Toast.makeText(this, "studentActivity"+sdept+syear+ssem, Toast.LENGTH_SHORT).show();
-        Log.d("inside loop",uid);
-       // Log.d("sdept",datalist.get("sdept"));
-       // Log.d("ssem",ssem);
-       // Log.d("syear",syear);
-       // Log.d("sname",sname);
-*/
 
         update.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -245,13 +173,25 @@ public class StudentActivity extends AppCompatActivity {
 
             }
         });
-
-        //Log.d("subject",subject);
         seeatt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 startActivity(intent);
+            }
+        });
+
+        viewnotice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intent1);
+            }
+        });
+
+        pdfview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intent2);
             }
         });
 

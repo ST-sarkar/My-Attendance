@@ -58,7 +58,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:orientation="vertical">
@@ -180,7 +180,19 @@
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:background="@drawable/gradient1"
-            android:text="View Notice"
+            android:text="View Message"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btn_viewpdf"
+            android:layout_below="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/gradient1"
+            android:text="Take notes"
             android:textColor="#FFFFFF" />
 
     </LinearLayout>

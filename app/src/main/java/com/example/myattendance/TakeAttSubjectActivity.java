@@ -56,7 +56,7 @@ public class TakeAttSubjectActivity extends AppCompatActivity {
                         }
                     });
 
-                }else {
+                }else if(from.equals("seeatt")) {
                     flag=1;
                     Intent intent=new Intent(TakeAttSubjectActivity.this,ViewAttendanceActivity.class);
                     intent.putExtra("dept",list.get(4*position));
@@ -71,6 +71,28 @@ public class TakeAttSubjectActivity extends AppCompatActivity {
                         }
                     });
 
+                }else if(from.equals("sendmess")){
+                    Intent intent=new Intent(TakeAttSubjectActivity.this,sendMessActivity.class);
+                    intent.putExtra("dept",list.get(4*position));
+                    intent.putExtra("year",list.get(4*position+1));
+                    intent.putExtra("semester",list.get(4*position+2));
+                    next.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(intent);
+                        }
+                    });
+                }else {
+                    Intent intent=new Intent(TakeAttSubjectActivity.this,pdfUploadActivity.class);
+                    intent.putExtra("dept",list.get(4*position));
+                    intent.putExtra("year",list.get(4*position+1));
+                    intent.putExtra("semester",list.get(4*position+2));
+                    next.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(intent);
+                        }
+                    });
                 }
             }
 

@@ -133,7 +133,7 @@
             android:text="send Message"
             android:textColor="#FFFFFF" />
         <Button
-            android:id="@+id/show_notice_button"
+            android:id="@+id/btn_upload_notes"
             android:layout_below="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -141,7 +141,7 @@
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/gradient1"
-            android:text="View Notice"
+            android:text="Upload PDF"
             android:textColor="#FFFFFF" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
