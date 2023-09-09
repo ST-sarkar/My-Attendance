@@ -20,7 +20,7 @@ import java.util.List;
 public class TeachDataActivity extends AppCompatActivity {
     Spinner dept,year,sem;
     Button next,add;
-    List<String> minlist=new ArrayList<>();
+    ArrayList<String> minlist=new ArrayList<>();
     List<String> listdept=new ArrayList<>();
     List<String> listyear=new ArrayList<>();
     List<String> listsem=new ArrayList<>();
@@ -128,9 +128,17 @@ public class TeachDataActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(flag==1) {
-                    Intent intent = new Intent(TeachDataActivity.this, AddTeacherActivity.class);
-                    intent.putStringArrayListExtra("list", (ArrayList<String>) minlist);
-                    startActivity(intent);
+                    if (getIntent().getStringExtra("from").equals("addUser")) {
+                        Intent intent = new Intent(TeachDataActivity.this, AddTeacherActivity.class);
+                        intent.putStringArrayListExtra("list", minlist);
+                        startActivity(intent);
+                    }else {
+                        Intent intent = new Intent(TeachDataActivity.this, viewTechActivity.class);
+                        intent.putExtra("dept",minlist.get(0));
+                        intent.putExtra("year",minlist.get(1));
+                        intent.putExtra("semester",minlist.get(2));
+                        startActivity(intent);
+                    }
                 }
                 else {
                     Toast.makeText(TeachDataActivity.this, "subject is essential", Toast.LENGTH_SHORT).show();

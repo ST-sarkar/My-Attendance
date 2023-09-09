@@ -54,7 +54,7 @@ public class AddTeacherActivity extends AppCompatActivity {
                                 public void onSuccess(AuthResult authResult) {
 
                                     Intent intent=getIntent();
-                                    List<String> intentlist=intent.getStringArrayListExtra("list");
+                                    ArrayList<String> intentlist=intent.getStringArrayListExtra("list");
                                     databaseReference.child(firebaseAuth.getUid()).child("name").setValue(name.getText().toString());
 
                                     for(int i=0;i<intentlist.size();i=i+4)

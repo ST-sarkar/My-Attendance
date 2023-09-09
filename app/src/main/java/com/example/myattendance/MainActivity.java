@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
         CDAU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showOptionDialog();
+                String from="addUser";
+                showOptionDialog(from);
             }
         });
         CDAS.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this,AddSubActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        CDVU.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String from="viewUser";
+                showOptionDialog(from);
             }
         });
 
@@ -55,9 +64,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
-    private void showOptionDialog() {
+    private void showOptionDialog(String from) {
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setTitle("Select User")
                 .setItems(R.array.user_selection, new DialogInterface.OnClickListener() {
@@ -67,9 +77,11 @@ public class MainActivity extends AppCompatActivity {
                         switch (which)
                         {
                             case 0:Intent intent=new Intent(MainActivity.this,StudDataActivity.class);
+                                   intent.putExtra("from",from);
                                    startActivity(intent);
                                    break;
                             case 1:Intent intent1=new Intent(MainActivity.this,TeachDataActivity.class);
+                                   intent1.putExtra("from",from);
                                    startActivity(intent1);
                                    break;
                         }

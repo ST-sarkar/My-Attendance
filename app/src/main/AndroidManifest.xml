@@ -15,6 +15,12 @@
         android:theme="@style/Theme.MyAttendance"
         tools:targetApi="31">
         <activity
+            android:name=".viewTechActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewStudeActivity"
+            android:exported="false" />
+        <activity
             android:name=".ViewPdfActivity"
             android:exported="false" />
         <activity

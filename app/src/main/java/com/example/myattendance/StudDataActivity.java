@@ -100,11 +100,21 @@ public class StudDataActivity extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(StudDataActivity.this,AddUserActivity.class);
-                intent.putExtra("dept",dp);
-                intent.putExtra("year",yr);
-                intent.putExtra("sem",semester);
-                startActivity(intent);
+                String from=getIntent().getStringExtra("from");
+                if(from.equals("addUser")) {
+                    Intent intent = new Intent(StudDataActivity.this, AddUserActivity.class);
+                    intent.putExtra("dept", dp);
+                    intent.putExtra("year", yr);
+                    intent.putExtra("sem", semester);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(StudDataActivity.this, ViewStudeActivity.class);
+                    intent.putExtra("dept", dp);
+                    intent.putExtra("year", yr);
+                    intent.putExtra("sem", semester);
+                    startActivity(intent);
+                }
             }
         });
     }
