@@ -20,6 +20,7 @@
         android:text="roll no"
         android:layout_marginStart="20dp"
         android:textSize="25sp"
+        android:ems="2"
         android:id="@+id/tx_roll"
         />
         <TextView
@@ -28,13 +29,9 @@
             android:text="name"
             android:layout_marginLeft="20dp"
             android:textSize="15sp"
+            android:ems="15"
             android:id="@+id/tx_name"
             />
-        <CheckBox
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:id="@+id/precheckbox"
-            android:layout_marginLeft="210dp"/>
         </LinearLayout>
 </androidx.cardview.widget.CardView>
 

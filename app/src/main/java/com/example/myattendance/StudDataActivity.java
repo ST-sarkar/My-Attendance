@@ -1,7 +1,9 @@
 package com.example.myattendance;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -46,8 +48,8 @@ public class StudDataActivity extends AppCompatActivity {
         listyear.add("TY");
         listyear.add("BE");
 
-        listsem.add("semester-1");
-        listsem.add("semester-2");
+        listsem.add("SEMESTER-1");
+        listsem.add("SEMESTER-2");
 
         deptAdapter=new ArrayAdapter<>(StudDataActivity.this, android.R.layout.simple_spinner_dropdown_item,listdept);
         dept.setAdapter(deptAdapter);
@@ -107,8 +109,38 @@ public class StudDataActivity extends AppCompatActivity {
                     intent.putExtra("year", yr);
                     intent.putExtra("sem", semester);
                     startActivity(intent);
-                }
-                else{
+                } else if (from.equals("removeUser")) {
+
+                    whichUserOption();
+
+                   /* AlertDialog.Builder builder=new AlertDialog.Builder(StudDataActivity.this)
+                            .setTitle("select user")
+                            .setItems(R.array.user_selection, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    switch (which)
+                                    {
+                                        case 0:Intent intent = new Intent(StudDataActivity.this, RemoveUserActivity.class);
+                                            intent.putExtra("dept", dp);
+                                            intent.putExtra("year", yr);
+                                            intent.putExtra("sem", semester);
+                                            intent.putExtra("user","student");
+                                            startActivity(intent);
+                                            break;
+                                        case 1:Intent intent1 = new Intent(StudDataActivity.this, RemoveUserActivity.class);
+                                            intent1.putExtra("dept", dp);
+                                            intent1.putExtra("year", yr);
+                                            intent1.putExtra("sem", semester);
+                                            intent1.putExtra("user","teacher");
+                                            startActivity(intent1);
+                                            break;
+                                    }
+                                }
+                            });
+                    AlertDialog alertDialog=builder.create();
+                    alertDialog.show();*/
+
+                } else{
                     Intent intent = new Intent(StudDataActivity.this, ViewStudeActivity.class);
                     intent.putExtra("dept", dp);
                     intent.putExtra("year", yr);
@@ -117,5 +149,36 @@ public class StudDataActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void whichUserOption() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(StudDataActivity.this)
+                .setTitle("select user")
+                .setItems(R.array.user_selection, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which)
+                        {
+                            case 0:Intent intent = new Intent(StudDataActivity.this, RemoveUserActivity.class);
+                                intent.putExtra("dept", dp);
+                                intent.putExtra("year", yr);
+                                intent.putExtra("sem", semester);
+                                intent.putExtra("user","student");
+                                //Toast.makeText(StudDataActivity.this, "studdataact"+dp+yr+semester, Toast.LENGTH_SHORT).show();
+                                startActivity(intent);
+                                break;
+                            case 1:Intent intent1 = new Intent(StudDataActivity.this, RemoveUserActivity.class);
+                                intent1.putExtra("dept", dp);
+                                intent1.putExtra("year", yr);
+                                intent1.putExtra("sem", semester);
+                                intent1.putExtra("user","teacher");
+                                //Toast.makeText(StudDataActivity.this, "studdataact"+dp+yr+semester, Toast.LENGTH_SHORT).show();
+                                startActivity(intent1);
+                                break;
+                        }
+                    }
+                });
+                AlertDialog alertDialog=builder.create();
+                    alertDialog.show();
     }
 }

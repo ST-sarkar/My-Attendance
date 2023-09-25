@@ -24,7 +24,7 @@ public class sendMessActivity extends AppCompatActivity {
         message=findViewById(R.id.ed_message);
         submit=findViewById(R.id.btn_submit);
 
-        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("Messages");
+        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("MESSAGES");
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

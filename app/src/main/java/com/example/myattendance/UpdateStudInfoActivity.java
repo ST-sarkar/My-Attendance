@@ -33,13 +33,21 @@ public class UpdateStudInfoActivity extends AppCompatActivity {
 
         String uid=getIntent().getStringExtra("uid");
 
-        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("students");
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("STUDENTS");
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!name.getText().toString().isEmpty() && !roll.getText().toString().isEmpty()) {
-                    reference.child(uid).child("name").setValue(name.getText().toString());
-                    reference.child(uid).child("roll").setValue(roll.getText().toString());
+                if(!name.getText().toString().isEmpty() && !roll.getText().toString().isEmpty() && roll.getText().toString().compareTo("000")>0 && roll.getText().toString().compareTo("999")<0) {
+                    reference.child(uid).child("NAME").setValue(name.getText().toString());
+                    String rl=roll.getText().toString();
+                    int l=rl.length();
+                    if(l==1) {
+                        reference.child(uid).child("ROLL").setValue("0"+rl);
+                    }else if(l>2){
+                        reference.child(uid).child("ROLL").setValue(String.valueOf(rl.charAt(l-2)+rl.charAt(l-1)));
+                    }else {
+                        reference.child(uid).child("ROLL").setValue(rl);
+                    }
                     Toast.makeText(UpdateStudInfoActivity.this, "Update Successful", Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(UpdateStudInfoActivity.this, "name and roll number are essential", Toast.LENGTH_SHORT).show();

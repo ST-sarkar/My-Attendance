@@ -53,7 +53,7 @@ public class AdapterRecView extends RecyclerView.Adapter<AdapterRecView.MyViewHo
         StudAttInfo stinfo=studList.get(position);
         holder.name.setText(stinfo.getSname());
         holder.roll.setText(stinfo.getSroll());
-        holder.checkBox.setChecked(stinfo.isPresent());
+
         if (stinfo.isPresent()) {
             holder.cd.setCardBackgroundColor(cl[1]); // Present color
         } else {
@@ -85,7 +85,7 @@ public class AdapterRecView extends RecyclerView.Adapter<AdapterRecView.MyViewHo
                     } else {
                         holder.cd.setCardBackgroundColor(cl[0]); // Absent color
                     }
-                    holder.checkBox.setChecked(stinfo.isPresent());
+
                     notifyDataSetChanged();
                 }
             }
@@ -100,7 +100,6 @@ public class AdapterRecView extends RecyclerView.Adapter<AdapterRecView.MyViewHo
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView roll,name;
-        public CheckBox checkBox;
         public CardView cd;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -108,7 +107,6 @@ public class AdapterRecView extends RecyclerView.Adapter<AdapterRecView.MyViewHo
 
             roll=itemView.findViewById(R.id.tx_roll);
             name=itemView.findViewById(R.id.tx_name);
-            checkBox=itemView.findViewById(R.id.precheckbox);
             cd=itemView.findViewById(R.id.cardv);
 
         }

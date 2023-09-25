@@ -18,16 +18,19 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        android:layout_height="550dp"
         android:layout_below="@id/mainToolbar"
         app:cardCornerRadius="20dp"
+        android:backgroundTint="#54DACCCB"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
+
         >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="30dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -38,14 +41,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 >
+
                 <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
                     android:id="@+id/spinner_dept"
-                    android:gravity="center"
-                    android:layout_margin="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/border"
                     android:contentDescription="to show department"
-                    android:background="@drawable/border"/>
+                    android:gravity="center" />
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -55,7 +62,7 @@
                     android:src="@drawable/baseline_arrow_circle_down_24"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
-                    android:paddingRight="30dp"/>
+                    android:paddingRight="50dp"/>
             </RelativeLayout>
             <TextView
                 android:layout_width="wrap_content"
@@ -68,10 +75,13 @@
                 android:layout_height="wrap_content">
                 <Spinner
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:id="@+id/spinner_year"
                     android:gravity="center"
-                    android:layout_margin="20dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="10dp"
                     android:contentDescription="to show year"
                     android:background="@drawable/border"/>
                 <ImageView
@@ -83,7 +93,7 @@
                     android:src="@drawable/baseline_arrow_circle_down_24"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
-                    android:paddingRight="30dp"/>
+                    android:paddingRight="50dp"/>
             </RelativeLayout>
 
             <TextView
@@ -97,10 +107,13 @@
                 android:layout_height="wrap_content">
                 <Spinner
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:id="@+id/spinner_sem"
                     android:gravity="center"
-                    android:layout_margin="20dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="10dp"
                     android:contentDescription="to show semester"
                     android:background="@drawable/border"/>
                 <ImageView
@@ -112,34 +125,52 @@
                     android:src="@drawable/baseline_arrow_circle_down_24"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
-                    android:paddingRight="30dp"/>
+                    android:paddingRight="50dp"/>
             </RelativeLayout>
 
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#37EFDE"
+                app:cardCornerRadius="20dp"
+                android:layout_gravity="center_horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/ed_sub"
-                android:hint=" type subject name"
-                android:ems="10"
+                android:hint="Enter subject"
+                android:ems="9"
                 android:layout_margin="10dp"
+                android:gravity="center_horizontal"
                 android:layout_gravity="center_horizontal"
                 android:textSize="25sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="subject not required to view teacher"/>
             <Button
-                android:layout_width="200dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_addtech"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:text="Add"
                 android:background="@drawable/gradient1"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
             <Button
-                android:layout_width="200dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_next"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:text="Next"
                 android:background="@drawable/gradient1"/>

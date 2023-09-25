@@ -25,6 +25,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -55,54 +57,60 @@ public class ViewAttendanceActivity extends AppCompatActivity {
         sub = getIntent().getStringExtra("subject");
         uid = getIntent().getStringExtra("uid");
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("attendance");
-        String path = uid + "/" + dept + "/" + year + "/" + sem + "/" + sub;
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("ATTENDANCE");
+
+        String path = uid + "/" + dept.toUpperCase() + "/" + year.toUpperCase() + "/" + sem.toUpperCase() + "/" + sub.toUpperCase();
         try {
 
             reference.child(path).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (task.getResult().exists()) {
-                        DataSnapshot dataSnapshot = task.getResult();
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            String suid = snapshot.getKey().toString();
-                            String roll = snapshot.child("rollno").getValue(String.class);
-                            String name = snapshot.child("name").getValue(String.class);
-                            int[] pcount = {0};
-                            int[] totalcount = {0};
-                            float[] percent = {0.0f};
+                    if(task.isSuccessful()) {
+                        if (task.getResult().exists()) {
+                            DataSnapshot dataSnapshot = task.getResult();
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                String suid = snapshot.getKey().toString();
+                                String roll = snapshot.child("ROLL").getValue(String.class);
+                                String name = snapshot.child("NAME").getValue(String.class);
+                                int[] pcount = {0};
+                                int[] totalcount = {0};
+                                float[] percent = {0.0f};
 
-                            reference.child(path).child(suid).child("Attendance Dates").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        if (task.getResult().exists()) {
-                                            totalcount[0] = (int) task.getResult().getChildrenCount();
-                                            for (DataSnapshot ds : task.getResult().getChildren()) {
-                                                //totalcount[0]+=1;
-                                                if (ds.getValue(boolean.class).equals(true))
-                                                    pcount[0]++;
+                                reference.child(path).child(suid).child("ATTENDANCE DATES").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            if (task.getResult().exists()) {
+                                                totalcount[0] = (int) task.getResult().getChildrenCount();
+                                                for (DataSnapshot ds : task.getResult().getChildren()) {
+                                                    //totalcount[0]+=1;
+                                                    if (ds.getValue(boolean.class).equals(true))
+                                                        pcount[0]++;
+                                                }
+                                                //Toast.makeText(ViewAttendanceActivity.this, "pcount="+ pcount[0] +"total="+ totalcount[0], Toast.LENGTH_SHORT).show();
+                                                if (totalcount[0] > 0) {
+                                                    percent[0] = ((float) pcount[0] / totalcount[0]) * 100.0f;
+                                                }
+                                                ViewStudAtt viewStudAtt = new ViewStudAtt(roll, name, String.format("%.2f", percent[0]));
+                                                Vstudents.add(viewStudAtt);
+                                                Collections.sort(Vstudents, new ViewStudAttComparator());
+                                                adViewRecview = new AdViewRecview(Vstudents);
+                                                Viewrecview.setAdapter(adViewRecview);
                                             }
-                                            //Toast.makeText(ViewAttendanceActivity.this, "pcount="+ pcount[0] +"total="+ totalcount[0], Toast.LENGTH_SHORT).show();
-                                            if (totalcount[0] > 0) {
-                                                percent[0] = ((float) pcount[0] / totalcount[0]) * 100.0f;
-                                            }
-                                            ViewStudAtt viewStudAtt = new ViewStudAtt(roll, name, String.valueOf(percent[0]));
-                                            Vstudents.add(viewStudAtt);
-                                            adViewRecview = new AdViewRecview(Vstudents);
-                                            Viewrecview.setAdapter(adViewRecview);
+                                        } else {
+                                            Toast.makeText(ViewAttendanceActivity.this, "attendance not fetch", Toast.LENGTH_SHORT).show();
                                         }
-                                    } else {
-                                        Toast.makeText(ViewAttendanceActivity.this, "attendance not fetch", Toast.LENGTH_SHORT).show();
                                     }
-                                }
-                            });
+                                });
 
 
-                        }
+                            }
 //
-                    }else{
-                        Toast.makeText(ViewAttendanceActivity.this, "data not exists", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(ViewAttendanceActivity.this, "data not exists", Toast.LENGTH_SHORT).show();
+                        }
+                    }else {
+                        Toast.makeText(ViewAttendanceActivity.this, "data not fetch", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -111,72 +119,12 @@ public class ViewAttendanceActivity extends AppCompatActivity {
             Toast.makeText(this, "error" + e, Toast.LENGTH_SHORT).show();
         }
     }
+
+    public class ViewStudAttComparator implements Comparator<ViewStudAtt> {
+        @Override
+        public int compare(ViewStudAtt o1, ViewStudAtt o2) {
+            // Compare by roll number in ascending order
+            return o1.getRoll().compareTo(o2.getRoll());
+        }
+    }
 }
-
-        /*
-        reference.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
-                    String roll=dataSnapshot.child("rollno").getValue(String.class);
-                    String name=dataSnapshot.child("name").getValue(String.class);
-                    long percent=0;
-                    long prcount=0;
-                    long totalcount=0;
-                    for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren() ){
-
-                        if (dataSnapshot1.getKey().equals("Attendance Dates")) {
-                            totalcount = dataSnapshot1.getChildrenCount();
-
-                            for (DataSnapshot dataSnapshot2 : dataSnapshot1.getChildren()) {
-                                if (dataSnapshot2.getValue(boolean.class).equals(true)) {
-                                    prcount = prcount + 1;
-                                    //Toast.makeText(ViewAttendanceActivity.this, "" + prcount, Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }
-                    }
-                    percent=(prcount/totalcount)*100;
-                    ViewStudAtt viewStudAtt=new ViewStudAtt(roll,name,String.valueOf(percent));
-                    Vstudents.add(viewStudAtt);
-
-                }
-                if(!Vstudents.isEmpty()) {
-                    adViewRecview = new AdViewRecview(Vstudents);
-                    Viewrecview.setAdapter(adViewRecview);
-                }else {
-                    Toast.makeText(ViewAttendanceActivity.this, "list is empty", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
-/*
-    private String getRollName(String suid) {
-        //List<String> grollname=new ArrayList<>();
-        final String[] groll = new String[1];
-        DatabaseReference reference1=FirebaseDatabase.getInstance().getReference("students");
-        reference1.child(suid).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-               /* grollname.add(snapshot.child("roll").getValue(String.class));
-                grollname.add(snapshot.child("name").getValue(String.class));
-                Toast.makeText(ViewAttendanceActivity.this, ""+grollname.get(0), Toast.LENGTH_SHORT).show();
-                groll[0] =snapshot.child("roll").getValue(String.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        return groll[0];
-        //return grollname;
-    }
-*/

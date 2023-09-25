@@ -48,7 +48,7 @@ public class AddUserActivity extends AppCompatActivity {
 
         firebaseAuth=FirebaseAuth.getInstance();
         firebaseDatabase=FirebaseDatabase.getInstance();
-        databaseReference=firebaseDatabase.getReference("students");
+        databaseReference=firebaseDatabase.getReference("STUDENTS");
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,11 +60,15 @@ public class AddUserActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
 
-                                    databaseReference.child(firebaseAuth.getUid()).child("department").setValue(sdepartment);
-                                    databaseReference.child(firebaseAuth.getUid()).child("year").setValue(syear);
-                                    databaseReference.child(firebaseAuth.getUid()).child("semester").setValue(ssem);
-                                    databaseReference.child(firebaseAuth.getUid()).child("name").setValue("ABC");
-                                    databaseReference.child(firebaseAuth.getUid()).child("roll").setValue("1");
+                                    databaseReference.child(firebaseAuth.getUid()).child("DEPARTMENT").setValue(sdepartment);
+                                    databaseReference.child(firebaseAuth.getUid()).child("YEAR").setValue(syear);
+                                    databaseReference.child(firebaseAuth.getUid()).child("SEMESTER").setValue(ssem);
+                                    databaseReference.child(firebaseAuth.getUid()).child("NAME").setValue("ABC");
+                                    databaseReference.child(firebaseAuth.getUid()).child("ROLL").setValue("00");
+                                    databaseReference.child(firebaseAuth.getUid()).child("EMAIL").setValue(email.getText().toString());
+                                    databaseReference.child(firebaseAuth.getUid()).child("PASS").setValue(pass.getText().toString());
+
+                                    Toast.makeText(AddUserActivity.this, "Student added successfully", Toast.LENGTH_SHORT).show();
 
                                     email.setText("");
                                     pass.setText("");

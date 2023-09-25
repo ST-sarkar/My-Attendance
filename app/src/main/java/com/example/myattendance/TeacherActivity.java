@@ -2,6 +2,7 @@ package com.example.myattendance;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ import java.util.List;
 public class TeacherActivity extends AppCompatActivity {
     ImageButton logout;
     TextView dept,name;
-    Button takeatt,seeatt,sendmessage,uploadnotes;
+    CardView takeatt,seeatt,sendmessage,uploadnotes;
     ArrayList<String> list=new ArrayList<>();
     String dp,nm,yr;
     String sem, sub;
@@ -35,20 +36,20 @@ public class TeacherActivity extends AppCompatActivity {
         logout=findViewById(R.id.btn_logout);
         dept=findViewById(R.id.tx_dept);
         name=findViewById(R.id.tx_name);
-        takeatt=findViewById(R.id.btn_takeatt);
-        seeatt=findViewById(R.id.btn_seeatt);
-        sendmessage=findViewById(R.id.show_msg_button);
-        uploadnotes=findViewById(R.id.btn_upload_notes);
+        takeatt=findViewById(R.id.CDTATT);
+        seeatt=findViewById(R.id.CDVATT);
+        sendmessage=findViewById(R.id.CDSDMSS);
+        uploadnotes=findViewById(R.id.CDULPDF);
 
         String uid=getIntent().getStringExtra("uid");
-        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Teachers");
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("TEACHERS");
 
         reference.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()) {
-                    nm=dataSnapshot.child("name").getValue(String.class);
-                    if (!dataSnapshot.getKey().equals("name") && !dataSnapshot.getKey().equals("usertype")) {
+                    nm=dataSnapshot.child("NAME").getValue(String.class);
+                    if (!dataSnapshot.getKey().equals("NAME") && !dataSnapshot.getKey().equals("EMAIL") && !dataSnapshot.getKey().equals("PASS")) {
                         dp = dataSnapshot.getKey();
                         reference.child(uid).child(dp).addValueEventListener(new ValueEventListener() {
                             @Override
@@ -56,10 +57,10 @@ public class TeacherActivity extends AppCompatActivity {
                                 for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
                                     yr = dataSnapshot1.getKey();
 
-                                    if (snapshot.child(yr).child("semester-1").exists()) {
-                                        sem = "semester-1";
+                                    if (snapshot.child(yr).child("SEMESTER-1").exists()) {
+                                        sem = "SEMESTER-1";
                                     } else {
-                                        sem = "semester-2";
+                                        sem = "SEMESTER-2";
                                     }
                                     sub = snapshot.child(yr).child(sem).getValue(String.class);
                                     list.add(dp);

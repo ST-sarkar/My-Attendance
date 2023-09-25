@@ -53,8 +53,8 @@ public class TeachDataActivity extends AppCompatActivity {
         listyear.add("TY");
         listyear.add("BE");
 
-        listsem.add("semester-1");
-        listsem.add("semester-2");
+        listsem.add("SEMESTER-1");
+        listsem.add("SEMESTER-2");
 
         deptAdapter=new ArrayAdapter<>(TeachDataActivity.this, android.R.layout.simple_spinner_dropdown_item,listdept);
         dept.setAdapter(deptAdapter);
@@ -114,7 +114,7 @@ public class TeachDataActivity extends AppCompatActivity {
                     minlist.add(semester);
                     minlist.add(subject);
 
-                    Toast.makeText(TeachDataActivity.this,"information added successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TeachDataActivity.this,"subject added successfully", Toast.LENGTH_SHORT).show();
                     sub.setText("");
                     flag=1;
                 }
@@ -127,16 +127,23 @@ public class TeachDataActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(flag==1) {
+                if(getIntent().getStringExtra("from").equals("viewUser")){
+                    Intent intent = new Intent(TeachDataActivity.this, viewTechActivity.class);
+                    intent.putExtra("dept",dp);
+                    intent.putExtra("year",yr);
+                    intent.putExtra("semester",semester);
+                    //Toast.makeText(TeachDataActivity.this, "dept:"+dp+yr+semester, Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
+                }
+                else if(flag==1) {
                     if (getIntent().getStringExtra("from").equals("addUser")) {
                         Intent intent = new Intent(TeachDataActivity.this, AddTeacherActivity.class);
                         intent.putStringArrayListExtra("list", minlist);
                         startActivity(intent);
-                    }else {
-                        Intent intent = new Intent(TeachDataActivity.this, viewTechActivity.class);
-                        intent.putExtra("dept",minlist.get(0));
-                        intent.putExtra("year",minlist.get(1));
-                        intent.putExtra("semester",minlist.get(2));
+                    } else if (getIntent().getStringExtra("from").equals("updateTeacher")) {
+                        Intent intent = new Intent(TeachDataActivity.this, updateTeacherActivity.class);
+                        intent.putStringArrayListExtra("List", minlist);
+                        intent.putExtra("uid",getIntent().getStringExtra("uid"));
                         startActivity(intent);
                     }
                 }

@@ -56,25 +56,23 @@ public class AttendanceActivity extends AppCompatActivity {
 
         int[] colors = {Color.RED, Color.GREEN};
 
-        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("students");
-        Query query=reference.orderByChild("roll");
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("STUDENTS");
+        Query query=reference.orderByChild("ROLL");
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()){
                     String suid=dataSnapshot.getKey();
                     String dp,yr,semm,nm,rl;
-                    dp=dataSnapshot.child("department").getValue(String.class);
-                    yr=dataSnapshot.child("year").getValue(String.class);
-                    semm=dataSnapshot.child("semester").getValue(String.class);
+                    dp=dataSnapshot.child("DEPARTMENT").getValue(String.class);
+                    yr=dataSnapshot.child("YEAR").getValue(String.class);
+                    semm=dataSnapshot.child("SEMESTER").getValue(String.class);
                     if(dept.equals(dp) && year.equals(yr) && sem.equals(semm)){
-                        nm=dataSnapshot.child("name").getValue(String.class);
-                        rl=dataSnapshot.child("roll").getValue(String.class);
-
+                        nm=dataSnapshot.child("NAME").getValue(String.class);
+                        rl=dataSnapshot.child("ROLL").getValue(String.class);
 
                         StudAttInfo studAttInfo=new StudAttInfo(nm,rl,suid);
                         students.add(studAttInfo);
-
                     }
                 }
                 if(!students.isEmpty()) {
@@ -109,11 +107,11 @@ public class AttendanceActivity extends AppCompatActivity {
                     String attendanceDate = attendance.getDate();
                     String sname=attendance.getName();
                     String sroll=attendance.getRoll();
-                    String path = "attendance/" + uid + "/" + dept + "/" + year + "/" + sem + "/" + sub + "/" + studentId;
+                    String path = "ATTENDANCE/" + uid + "/" + dept.toUpperCase() + "/" + year.toUpperCase() + "/" + sem.toUpperCase() + "/" + sub.toUpperCase() + "/" + studentId;
 
-                    reference1.child(path).child("Attendance Dates").child(attendanceDate).setValue(isPresent);
-                    reference1.child(path).child("name").setValue(sname);
-                    reference1.child(path).child("rollno").setValue(sroll);
+                    reference1.child(path).child("ATTENDANCE DATES").child(attendanceDate).setValue(isPresent);
+                    reference1.child(path).child("NAME").setValue(sname);
+                    reference1.child(path).child("ROLL").setValue(sroll);
 
                 }
 
@@ -123,7 +121,5 @@ public class AttendanceActivity extends AppCompatActivity {
                 adapterRecView.notifyDataSetChanged();
             }
         });
-
-
     }
 }

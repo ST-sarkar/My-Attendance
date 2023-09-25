@@ -43,7 +43,7 @@ public class AddSubActivity extends AppCompatActivity {
         add=findViewById(R.id.btn_addsub);
 
         firebaseDatabase=FirebaseDatabase.getInstance();
-        databaseReference=firebaseDatabase.getReference("Subjects");
+        databaseReference=firebaseDatabase.getReference("SUBJECTS");
 
         listdept.add("CSE");
         listdept.add("E&TC");
@@ -56,8 +56,8 @@ public class AddSubActivity extends AppCompatActivity {
         listyear.add("TY");
         listyear.add("BE");
 
-        listsem.add("semester-1");
-        listsem.add("semester-2");
+        listsem.add("SEMESTER-1");
+        listsem.add("SEMESTER-2");
 
         deptAdapter=new ArrayAdapter<>(AddSubActivity.this, android.R.layout.simple_spinner_dropdown_item,listdept);
         dept.setAdapter(deptAdapter);
@@ -112,7 +112,7 @@ public class AddSubActivity extends AppCompatActivity {
             public void onClick(View v) {
                 subject=sub.getText().toString();
                 if(!subject.isEmpty()){
-                    databaseReference.child(dp).child(yr).child(semester).child(subject).setValue("");
+                    databaseReference.child(dp).child(yr).child(semester).child(subject).setValue(subject);
                     Toast.makeText(AddSubActivity.this, subject+" Subject added successfully", Toast.LENGTH_SHORT).show();
                     sub.setText("");
                 }

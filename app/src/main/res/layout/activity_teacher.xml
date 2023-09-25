@@ -87,64 +87,160 @@
 
         </LinearLayout>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
+        <GridLayout
+            android:rowCount="2"
+            android:columnCount="2"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp">
-            <LinearLayout
-                android:id="@+id/layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="5dp"
-                android:gravity="center">
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:columnOrderPreserved="false">
 
-                <Button
-                    android:id="@+id/btn_takeatt"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CDTATT"
+                android:layout_height="150dp"
+                android:layout_width="150dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="10dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="10dp"
+                android:layout_gravity="center_horizontal"
+                android:focusable="true">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginEnd="40dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/gradient1"
-                    android:text="Take Attendance"
-                    android:textColor="#FFFFFF" />
-                <Button
-                    android:id="@+id/btn_seeatt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginEnd="40dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/gradient1"
-                    android:text="See Attendance"
-                    android:textColor="#FFFFFF" />
+                    android:gravity="center">
+                    <ImageView
+                        android:src="@drawable/take_attendance"
+                        android:layout_height="70dp"
+                        android:layout_width="70dp"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:id="@+id/TAButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Take\nAttendance"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
 
-        <Button
-            android:id="@+id/show_msg_button"
-            android:layout_below="@+id/layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/gradient1"
-            android:text="send Message"
-            android:textColor="#FFFFFF" />
-        <Button
-            android:id="@+id/btn_upload_notes"
-            android:layout_below="@+id/layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/gradient1"
-            android:text="Upload PDF"
-            android:textColor="#FFFFFF" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CDVATT"
+                android:layout_height="150dp"
+                android:layout_width="150dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="10dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="10dp"
+                android:layout_gravity="center_horizontal"
+                android:focusable="true">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="center">
+                    <ImageView
+                        android:src="@drawable/see_atten"
+                        android:layout_height="70dp"
+                        android:layout_width="70dp"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:id="@+id/SSButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="See\nAttendance"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CDSDMSS"
+                android:layout_height="150dp"
+                android:layout_width="150dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="10dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="10dp"
+                android:layout_gravity="center_horizontal"
+                android:focusable="true">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="center">
+                    <ImageView
+                        android:src="@drawable/vector_message"
+                        android:layout_height="70dp"
+                        android:layout_width="70dp"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:id="@+id/add_student"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Send\nMessage(to all)"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CDULPDF"
+                android:layout_height="150dp"
+                android:layout_width="150dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="10dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="10dp"
+                android:layout_gravity="center_horizontal"
+                android:focusable="true">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="center">
+                    <ImageView
+                        android:src="@drawable/analyse"
+                        android:layout_height="70dp"
+                        android:layout_width="70dp"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:id="@+id/exit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Uploade\nPDF"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </GridLayout>
 
     </LinearLayout>
 

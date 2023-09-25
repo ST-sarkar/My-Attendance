@@ -23,14 +23,14 @@ public class viewTechActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_tech);
 
         tlist=findViewById(R.id.tx_teachview);
-        String dept,year,sem,sub;
+        String dept,year,sem;
         dept=getIntent().getStringExtra("dept");
         year=getIntent().getStringExtra("year");
         sem=getIntent().getStringExtra("semester");
 
-        databaseReference= FirebaseDatabase.getInstance().getReference("Teachers");
+        databaseReference= FirebaseDatabase.getInstance().getReference("TEACHERS");
         StringBuilder stringBuilder=new StringBuilder();
-        stringBuilder.append("Name of Teacher");
+        stringBuilder.append("Name of Teacher\n");
 
         databaseReference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -38,10 +38,10 @@ public class viewTechActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     if(task.getResult().exists()){
                         for(DataSnapshot dataSnapshot:task.getResult().getChildren()){
-                            Toast.makeText(viewTechActivity.this, "inside for,dept:"+dept+year+sem, Toast.LENGTH_SHORT).show();
-                            if(dataSnapshot.child(dept).child(year).child(sem).getKey().equals(sem)){
-                                Toast.makeText(viewTechActivity.this, "inside if,dept:"+dept+year+sem, Toast.LENGTH_SHORT).show();
-                                    stringBuilder.append(dataSnapshot.child("name").getValue(String.class)).append("\n");
+                            //Toast.makeText(viewTechActivity.this, "inside for,dept:"+dept+year+sem, Toast.LENGTH_SHORT).show();
+                            if(dataSnapshot.child(dept).child(year).child(sem).exists()){
+                                //Toast.makeText(viewTechActivity.this, "inside if,dept:"+dept+year+sem, Toast.LENGTH_SHORT).show();
+                                    stringBuilder.append(dataSnapshot.child("NAME").getValue(String.class)).append("\n");
                             }
 
                         }

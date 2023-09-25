@@ -106,6 +106,8 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusable="true"
+            app:cardElevation="10dp"
             android:layout_margin="20dp">
 
             <RelativeLayout
@@ -155,45 +157,129 @@
                     android:background="@drawable/gradient1"
                     android:text="See Attendance"
                     android:textColor="#FFFFFF" />
+
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
 
 
 
-        <Button
-            android:id="@+id/update_info_button"
-            android:layout_below="@+id/layout"
+        <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/gradient1"
-            android:text="Update Information"
-            android:textColor="#FFFFFF" />
-        <Button
-            android:id="@+id/show_notice_button"
-            android:layout_below="@+id/layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:background="@drawable/gradient1"
-            android:text="View Message"
-            android:textColor="#FFFFFF" />
+            android:layout_height="200dp"
+            android:rowCount="1"
+            android:columnCount="3">
+            <androidx.cardview.widget.CardView
+                android:layout_height="130dp"
+                android:layout_width="100dp"
+                android:id="@+id/CDUPDT"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:focusable="true"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/take_attendance"
+                    android:layout_gravity="center_horizontal"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="update\ninformation"/>
 
-        <Button
-            android:id="@+id/btn_viewpdf"
-            android:layout_below="@+id/layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:background="@drawable/gradient1"
-            android:text="Take notes"
-            android:textColor="#FFFFFF" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_height="130dp"
+                android:layout_width="100dp"
+                android:id="@+id/CDMSS"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:focusable="true"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/see_atten"
+                        android:layout_gravity="center_horizontal"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:text="See\nMessage"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_height="130dp"
+                android:layout_width="100dp"
+                android:id="@+id/CDPDF"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="10dp"
+                android:layout_gravity="center_horizontal"
+
+                android:focusable="true"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/analyse"
+                        android:layout_gravity="center_horizontal"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:text="View\nPDF"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+        </GridLayout>
 
     </LinearLayout>
 

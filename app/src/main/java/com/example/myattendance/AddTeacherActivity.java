@@ -41,7 +41,7 @@ public class AddTeacherActivity extends AppCompatActivity {
 
         firebaseAuth=FirebaseAuth.getInstance();
         firebaseDatabase=FirebaseDatabase.getInstance();
-        databaseReference=firebaseDatabase.getReference("Teachers");
+        databaseReference=firebaseDatabase.getReference("TEACHERS");
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,13 +55,16 @@ public class AddTeacherActivity extends AppCompatActivity {
 
                                     Intent intent=getIntent();
                                     ArrayList<String> intentlist=intent.getStringArrayListExtra("list");
-                                    databaseReference.child(firebaseAuth.getUid()).child("name").setValue(name.getText().toString());
+                                    databaseReference.child(firebaseAuth.getUid()).child("NAME").setValue(name.getText().toString());
+                                    databaseReference.child(firebaseAuth.getUid()).child("EMAIL").setValue(email.getText().toString());
+                                    databaseReference.child(firebaseAuth.getUid()).child("PASS").setValue(pass.getText().toString());
 
                                     for(int i=0;i<intentlist.size();i=i+4)
                                     {
-                                            databaseReference.child(firebaseAuth.getUid()).child(intentlist.get(i)).child(intentlist.get(i+1)).child(intentlist.get(i+2)).setValue(intentlist.get(i+3));
+                                            databaseReference.child(firebaseAuth.getUid()).child(intentlist.get(i).toUpperCase()).child(intentlist.get(i+1).toUpperCase()).child(intentlist.get(i+2).toUpperCase()).setValue(intentlist.get(i+3).toUpperCase());
 
                                     }
+                                    name.setText("");
                                     email.setText("");
                                     pass.setText("");
                                     Toast.makeText(AddTeacherActivity.this, "Teacher added successfully", Toast.LENGTH_SHORT).show();

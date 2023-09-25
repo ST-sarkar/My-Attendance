@@ -62,7 +62,7 @@ public class StudAttViewActivity extends AppCompatActivity {
         uid = getIntent().getStringExtra("suid");
 
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Teachers");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("TEACHERS");
         databaseReference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -71,70 +71,77 @@ public class StudAttViewActivity extends AppCompatActivity {
                     if (teacherSnapshot.exists()) {
 
                         for (DataSnapshot dataSnapshot : teacherSnapshot.getChildren()) {
-                            DataSnapshot semSnapshot=dataSnapshot.child(dept).child(year).child(sem);
+                            DataSnapshot semSnapshot=dataSnapshot.child(dept.toUpperCase()).child(year.toUpperCase()).child(sem.toUpperCase());
                             String str = semSnapshot.getValue(String.class);
                             //Toast.makeText(StudAttViewActivity.this, "datasnapshot1 :" + str+sub, Toast.LENGTH_SHORT).show();
                             if (str!=null && str.equalsIgnoreCase(sub)) {
                                 tuid = dataSnapshot.getKey();
                                 //Toast.makeText(StudAttViewActivity.this, "inside to get tuid:"+tuid, Toast.LENGTH_SHORT).show();
 
-                                float[] percent = {100.0f};
+                                float[] percent = {0.0f};
                                 int[] prcount = {0};
                                 int[] totalcount = {0};
                                 //Toast.makeText(StudAttViewActivity.this, "tuid3:"+tuid, Toast.LENGTH_SHORT).show();
-                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("attendance");
-                                String path = tuid + "/" + dept + "/" + year + "/" + sem + "/" + sub.toLowerCase() + "/" + uid;
+                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("ATTENDANCE");
+                                String path = tuid + "/" + dept.toUpperCase() + "/" + year.toUpperCase() + "/" + sem.toUpperCase() + "/" + sub.toUpperCase() + "/" + uid;
                                 reference.child(path).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                                         //Toast.makeText(StudAttViewActivity.this, "oncomplete", Toast.LENGTH_SHORT).show();
+                                        if(task.isSuccessful()) {
+                                            if(task.getResult().exists()) {
 
-                                        DataSnapshot snapshot = task.getResult();
+                                                DataSnapshot snapshot = task.getResult();
 
-                                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                            //Toast.makeText(StudAttViewActivity.this, "in snapshot", Toast.LENGTH_SHORT).show();
+                                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                                    //Toast.makeText(StudAttViewActivity.this, "in snapshot", Toast.LENGTH_SHORT).show();
 
-                                            if (dataSnapshot.getKey().equals("Attendance Dates")) {
-                                                totalcount[0] = (int) dataSnapshot.getChildrenCount();
-                                                //Toast.makeText(StudAttViewActivity.this, "inside attendance dates", Toast.LENGTH_SHORT).show();
+                                                    if (dataSnapshot.getKey().equals("ATTENDANCE DATES")) {
+                                                        totalcount[0] = (int) dataSnapshot.getChildrenCount();
+                                                        //Toast.makeText(StudAttViewActivity.this, "inside attendance dates", Toast.LENGTH_SHORT).show();
 
-                                                for (DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
-                                                    datelist.add(dataSnapshot2.getKey());
-                                                    presentlist.add(String.valueOf(dataSnapshot2.getValue(boolean.class)));
+                                                        for (DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
+                                                            datelist.add(dataSnapshot2.getKey());
+                                                            presentlist.add(String.valueOf(dataSnapshot2.getValue(boolean.class)));
 
-                                                    //attdata.put(dataSnapshot2.getKey(), String.valueOf(dataSnapshot2.getValue(boolean.class)));
+                                                            //attdata.put(dataSnapshot2.getKey(), String.valueOf(dataSnapshot2.getValue(boolean.class)));
 
-                                                    if (dataSnapshot2.getValue(boolean.class).equals(true)) {
-                                                        prcount[0]++;
+                                                            if (dataSnapshot2.getValue(boolean.class).equals(true)) {
+                                                                prcount[0]++;
+                                                            }
+
+                                                        }
+                                                        if (totalcount[0] > 0) {
+                                                            Toast.makeText(StudAttViewActivity.this, "percent:" + percent[0], Toast.LENGTH_SHORT).show();
+                                                            percent[0] = ((float) prcount[0] / totalcount[0]) * 100.0f;
+                                                        }
+                                                        txtotal.setText(String.valueOf(totalcount[0]));
+                                                        txpresent.setText(String.valueOf(prcount[0]));
+                                                        txpercent.setText(String.format("%.2f", percent[0]) + "%");
+
+                                                        if (percent[0] < 75.0f) {
+                                                            isdefualter.setText("You are in Defualter list");
+                                                            isdefualter.setTextColor(Color.RED);
+                                                        } else{
+                                                            isdefualter.setText("You are not in Defualter list");
+                                                            isdefualter.setTextColor(Color.GREEN);
+                                                        }
+                                                        btn_checkatt.setClickable(true);
                                                     }
-
                                                 }
-                                                if(totalcount[0]>0) {
-                                                    Toast.makeText(StudAttViewActivity.this, "percent:"+percent[0], Toast.LENGTH_SHORT).show();
-                                                    percent[0] = ((float) prcount[0] / totalcount[0]) * 100.0f;
-                                                }
-                                                txtotal.setText(String.valueOf(totalcount[0]));
-                                                txpresent.setText(String.valueOf(prcount[0]));
-                                                txpercent.setText(percent[0] + "%");
+                                            }else {
+                                                Toast.makeText(StudAttViewActivity.this, "attendance data not present", Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(StudAttViewActivity.this, "error:" + e, Toast.LENGTH_SHORT).show();
+                                        isdefualter.setVisibility(View.INVISIBLE);
+                                        btn_checkatt.setClickable(false);
+                                        Toast.makeText(StudAttViewActivity.this, "Student has no attendance data", Toast.LENGTH_SHORT).show();
                                     }
                                 });
-
-
-                                if (percent[0] < 75.0f) {
-                                    isdefualter.setText("You are in Defualter list");
-                                    isdefualter.setTextColor(Color.RED);
-                                } else {
-                                    isdefualter.setText("You are not in Defualter list");
-                                    isdefualter.setTextColor(Color.GREEN);
-
-                                }
 
                                 break;
                             }

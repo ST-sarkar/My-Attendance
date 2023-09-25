@@ -15,6 +15,12 @@
         android:theme="@style/Theme.MyAttendance"
         tools:targetApi="31">
         <activity
+            android:name=".updateTeacherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RemoveUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".viewTechActivity"
             android:exported="false" />
         <activity

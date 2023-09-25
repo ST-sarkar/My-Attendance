@@ -111,7 +111,7 @@ public class pdfUploadActivity extends AppCompatActivity {
         ProgressDialog pd=new ProgressDialog(this);
         pd.setTitle("Uploading File");
         pd.show();
-        databaseReference= FirebaseDatabase.getInstance().getReference("Notes");
+        databaseReference= FirebaseDatabase.getInstance().getReference("NOTES");
         storageReference= FirebaseStorage.getInstance().getReference();
         if(!filename.getText().toString().isEmpty()) {
             StorageReference reference = storageReference.child("UploadedNotes/" + System.currentTimeMillis() + ".pdf");

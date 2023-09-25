@@ -29,7 +29,7 @@ public class ViewMessageActivity extends AppCompatActivity {
         String dept=intent.getStringExtra("dept");
         String sem=intent.getStringExtra("semester");
 
-        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("Messages");
+        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("MESSAGES");
         if(!year.isEmpty() && !dept.isEmpty() && !sem.isEmpty()){
             databaseReference.child(dept).child(year).child(sem).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override

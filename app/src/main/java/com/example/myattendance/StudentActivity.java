@@ -2,6 +2,7 @@ package com.example.myattendance;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,7 +34,8 @@ import java.util.Objects;
 
 public class StudentActivity extends AppCompatActivity {
     ImageButton logout;
-    Button update, seeatt,viewnotice,pdfview;
+    Button seeatt;
+    CardView update,viewnotice,pdfview;
     TextView dept, year, sem, name;
     Spinner sp_subject;
     ArrayAdapter<String> adaptersub;
@@ -47,10 +49,10 @@ public class StudentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student);
 
         logout = findViewById(R.id.btn_logout);
-        update = findViewById(R.id.update_info_button);
-        pdfview = findViewById(R.id.btn_viewpdf);
+        update=findViewById(R.id.CDUPDT);
+        pdfview = findViewById(R.id.CDPDF);
         seeatt = findViewById(R.id.Seeatt_Button);
-        viewnotice=findViewById(R.id.show_notice_button);
+        viewnotice=findViewById(R.id.CDMSS);
         dept = findViewById(R.id.tx_dept);
         year = findViewById(R.id.tx_year);
         sem = findViewById(R.id.tx_sem);
@@ -62,7 +64,7 @@ public class StudentActivity extends AppCompatActivity {
         Intent intent1=new Intent(StudentActivity.this,ViewMessageActivity.class);
         Intent intent2=new Intent(StudentActivity.this,PDFViewActivity.class);
         List<String> sublist = new ArrayList<>();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("students");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("STUDENTS");
 
         reference.child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -70,10 +72,10 @@ public class StudentActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     if (task.getResult().exists()) {
                         DataSnapshot dataSnapshot = task.getResult();
-                        sname = String.valueOf(dataSnapshot.child("name").getValue());
-                        sdept = String.valueOf(dataSnapshot.child("department").getValue());
-                        ssem = String.valueOf(dataSnapshot.child("semester").getValue());
-                        syear = String.valueOf(dataSnapshot.child("year").getValue());
+                        sname = String.valueOf(dataSnapshot.child("NAME").getValue());
+                        sdept = String.valueOf(dataSnapshot.child("DEPARTMENT").getValue());
+                        ssem = String.valueOf(dataSnapshot.child("SEMESTER").getValue());
+                        syear = String.valueOf(dataSnapshot.child("YEAR").getValue());
 
                         intent1.putExtra("year",syear);
                         intent1.putExtra("dept",sdept);
@@ -90,7 +92,7 @@ public class StudentActivity extends AppCompatActivity {
 
                         //getsubjects(sdept,syear,ssem);
                         if (sdept != null && syear != null && ssem != null) {
-                            DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("Subjects");
+                            DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("SUBJECTS");
                             reference1.child(sdept).child(syear).child(ssem).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -104,7 +106,7 @@ public class StudentActivity extends AppCompatActivity {
                                             adaptersub.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                             sp_subject.setAdapter(adaptersub);
                                         }else {
-                                            Toast.makeText(StudentActivity.this, "empty sublist", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(StudentActivity.this, "student not enrolled for any subject", Toast.LENGTH_SHORT).show();
                                         }
                                         sp_subject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                             @Override
@@ -124,7 +126,7 @@ public class StudentActivity extends AppCompatActivity {
                                         intent.putExtra("suid",uid);
 
                                     }else {
-                                        Toast.makeText(StudentActivity.this, "Subject data not found ", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(StudentActivity.this, "student not enrolled for any subject", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }).addOnFailureListener(new OnFailureListener() {

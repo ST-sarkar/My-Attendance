@@ -31,7 +31,7 @@ public class ViewStudeActivity extends AppCompatActivity {
 
         StringBuilder stringBuilder=new StringBuilder();
         stringBuilder.append("Roll No").append("\t\t\t").append("Name of Students").append("\n");
-        databaseReference= FirebaseDatabase.getInstance().getReference("students");
+        databaseReference= FirebaseDatabase.getInstance().getReference("STUDENTS");
 
         databaseReference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -42,9 +42,9 @@ public class ViewStudeActivity extends AppCompatActivity {
                         for(DataSnapshot dataSnapshot:task.getResult().getChildren()){
                             studView st=dataSnapshot.getValue(studView.class);
                             if (st!=null){
-                                Toast.makeText(ViewStudeActivity.this, "dept"+st.getDepartment()+st.getYear()+st.getSemester()+st.getRoll()+st.getName(), Toast.LENGTH_SHORT).show();
-                                if (st.getDepartment().equals(dept) && st.getYear().equals(year) && st.getSemester().equals(sem)) {
-                                    stringBuilder.append(st.getRoll()).append("\t\t\t\t").append(st.getName()).append("\n");
+                                //Toast.makeText(ViewStudeActivity.this, "dept"+st.getDepartment()+st.getYear()+st.getSemester()+st.getRoll()+st.getName(), Toast.LENGTH_SHORT).show();
+                                if (st.getDEPARTMENT().equals(dept) && st.getYEAR().equals(year) && st.getSEMESTER().equals(sem)) {
+                                    stringBuilder.append(st.getROLL()).append("\t\t\t\t").append(st.getNAME()).append("\n");
                                 }
                             }
                             list.setText(stringBuilder);

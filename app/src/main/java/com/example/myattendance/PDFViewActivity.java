@@ -35,7 +35,7 @@ public class PDFViewActivity extends AppCompatActivity {
 
         // Define the query to retrieve 'fileInfo' data from Firebase
         Query query = FirebaseDatabase.getInstance()
-                .getReference("Notes")
+                .getReference("NOTES")
                 .child(getIntent().getStringExtra("dept"))
                 .child(getIntent().getStringExtra("year"))
                 .child(getIntent().getStringExtra("semester"));

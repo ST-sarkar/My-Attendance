@@ -63,9 +63,9 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
                                     List<String> user=new ArrayList<>();
-                                    user.add(0,"admin");
-                                    user.add(1,"Teachers");
-                                    user.add(2,"students");
+                                    user.add(0,"ADMINS");
+                                    user.add(1,"TEACHERS");
+                                    user.add(2,"STUDENTS");
                                     for (int i=0;i<user.size();i++){
                                         databaseReference=firebaseDatabase.getReference().child(user.get(i));
 
@@ -81,7 +81,6 @@ public class LoginActivity extends AppCompatActivity {
                                                             if(finalI ==0) {
                                                                 loadingbar.dismiss();
                                                                 Intent intent2 = new Intent(LoginActivity.this, MainActivity.class);
-                                                                intent2.putExtra("uid",mAuth.getUid());
                                                                 Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                                                 startActivity(intent2);
                                                                 finish();
