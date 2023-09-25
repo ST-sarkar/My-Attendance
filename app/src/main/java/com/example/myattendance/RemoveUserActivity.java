@@ -58,7 +58,7 @@ public class RemoveUserActivity extends AppCompatActivity {
                                 String email = dataSnapshot.child("EMAIL").getValue(String.class);
                                 String pass = dataSnapshot.child("PASS").getValue(String.class);
                                 if (sub != null && sub.equalsIgnoreCase(sub)) {
-                                    Toast.makeText(RemoveUserActivity.this, "name" + sub, Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(RemoveUserActivity.this, "name" + sub, Toast.LENGTH_SHORT).show();
                                     removeTechModel removeModel = new removeTechModel(tuid, name, sub);
                                     teacheruser.add(removeModel);
                                 }

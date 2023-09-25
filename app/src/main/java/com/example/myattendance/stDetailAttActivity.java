@@ -48,13 +48,13 @@ public class stDetailAttActivity extends AppCompatActivity {
                 todate=to.getText().toString();
                 fromdate=from.getText().toString();
                 if(!todate.isEmpty()&&!fromdate.isEmpty()) {
-                    Toast.makeText(stDetailAttActivity.this, "inside not empty", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(stDetailAttActivity.this, "inside not empty", Toast.LENGTH_SHORT).show();
 
                     StringBuilder stringBuilder = new StringBuilder();
                     stringBuilder.append("Dates\t\t\t\t\t\t\t\t\t\t\t\t\t\tAttendance").append(System.getProperty("line.separator"));
                     for (int i=0;i<datelist.size();i++) {
                         String str=datelist.get(i);
-                        Toast.makeText(stDetailAttActivity.this, "inside for loop", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(stDetailAttActivity.this, "inside for loop", Toast.LENGTH_SHORT).show();
                         if (fromdate.compareTo(str)<=0 && todate.compareTo(str)>=0) {
                             str=str.substring(6,8)+"/"+str.substring(4,6)+"/"+str.substring(0,4);
                             if (presentlist.get(i).equals("true")) {
@@ -62,7 +62,7 @@ public class stDetailAttActivity extends AppCompatActivity {
                             } else {
                                 stringBuilder.append(str).append("   Absent").append(System.getProperty("line.separator"));
                             }
-                            Toast.makeText(stDetailAttActivity.this, "inside from date", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(stDetailAttActivity.this, "inside from date", Toast.LENGTH_SHORT).show();
                         }
                         displayatt.setText(stringBuilder.toString());
                     }

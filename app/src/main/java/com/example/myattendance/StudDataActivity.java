@@ -113,33 +113,6 @@ public class StudDataActivity extends AppCompatActivity {
 
                     whichUserOption();
 
-                   /* AlertDialog.Builder builder=new AlertDialog.Builder(StudDataActivity.this)
-                            .setTitle("select user")
-                            .setItems(R.array.user_selection, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    switch (which)
-                                    {
-                                        case 0:Intent intent = new Intent(StudDataActivity.this, RemoveUserActivity.class);
-                                            intent.putExtra("dept", dp);
-                                            intent.putExtra("year", yr);
-                                            intent.putExtra("sem", semester);
-                                            intent.putExtra("user","student");
-                                            startActivity(intent);
-                                            break;
-                                        case 1:Intent intent1 = new Intent(StudDataActivity.this, RemoveUserActivity.class);
-                                            intent1.putExtra("dept", dp);
-                                            intent1.putExtra("year", yr);
-                                            intent1.putExtra("sem", semester);
-                                            intent1.putExtra("user","teacher");
-                                            startActivity(intent1);
-                                            break;
-                                    }
-                                }
-                            });
-                    AlertDialog alertDialog=builder.create();
-                    alertDialog.show();*/
-
                 } else{
                     Intent intent = new Intent(StudDataActivity.this, ViewStudeActivity.class);
                     intent.putExtra("dept", dp);

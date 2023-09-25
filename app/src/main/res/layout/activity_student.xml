@@ -240,6 +240,7 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                 android:layout_height="130dp"
                 android:layout_width="100dp"
@@ -249,8 +250,7 @@
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="10dp"
-                android:layout_gravity="center_horizontal"
-
+                android:layout_gravity="center"
                 android:focusable="true"
                 >
                 <LinearLayout
@@ -259,10 +259,10 @@
                     android:orientation="vertical"
                     android:gravity="center"
                     android:layout_marginTop="20dp"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center_horizontal">
                     <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:src="@drawable/analyse"
                         android:layout_gravity="center_horizontal"/>
                     <TextView
@@ -271,7 +271,7 @@
                         android:textSize="15sp"
                         android:layout_gravity="center_horizontal"
                         android:gravity="center_horizontal"
-                        android:text="View\nPDF"/>
+                        android:text="See\nMessage"/>
 
                 </LinearLayout>
 
